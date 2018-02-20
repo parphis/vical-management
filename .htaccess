@@ -1,0 +1,4 @@
+Options -Indexes
+<FilesMatch "\.(sqlite|vim)$">
+  Deny from all
+</FilesMatch>

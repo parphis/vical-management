@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+   <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <title>viCal</title>
+     <link rel="stylesheet" type="text/css" href="./css/w3.css">
+     <link rel="stylesheet" type="text/css" href="./css/w3mobile.css">
+     <link rel="stylesheet" type="text/css" href="css/main.css?agt3564gdtr9kjtug765dhftr501">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> 
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script src="tools.js"></script>
+     <script type="text/javascript">
+      $(document).ready(function() {
+        $("#menu").hide();
+        $("#close-menu").click(function() {
+          $("#menu").hide();
+        });
+        $("#open-menu").click(function() {
+          $("#menu").show();
+        });
+        $("#confirm-cancel").click(function(event) {
+          event.preventDefault();
+          $("#confirm").toggleClass("w3-show");
+          $("#confirm-text").text("");
+          $("#confirm-ok").click(function() {});
+        });
+        $("#category-form-cancel").click(function(event) {
+          event.preventDefault();
+          $("#category-popup").toggleClass("w3-show");
+          $("#category-fields-error").removeClass("w3-show");
+          $("#category-form-ok").click(function() {});
+        });
+        $("#event-form-cancel").click(function(event) {
+          event.preventDefault();
+          $("#event-popup").toggleClass("w3-show");
+          $("#event-fields-error").removeClass("w3-show");
+          $("#event-form-ok").click(function() {});
+        });
+        getCategories();
+        listEvents();
+      });
+     </script>
+   </head>
+   <body>
+    <nav class="w3-sidebar w3-bar-block w3-card" id="menu">
+      <div class="w3-container w3-theme-d2">
+        <span id="close-menu" class="w3-button w3-display-topright w3-large">x</span>
+        <br>
+        <div class="w3-padding w3-center">
+          <p>Menü</p>
+        </div>
+      </div>
+      <a class="w3-bar-item w3-button" href="#" onclick="listEvents();$('#menu').hide();"><i class="material-icons">perm_contact_calendar</i> Események</a>
+      <a class="w3-bar-item w3-button" href="#" onclick="listCategories();$('#menu').hide();"><i class="material-icons">build</i> Kategóriák</a>
+    </nav>
+    <header class="w3-bar w3-card w3-theme">
+      <button id="open-menu" class="w3-bar-item w3-button w3-xxxlarge w3-hover-theme">&#9776;</button>
+      <h1 class="w3-bar-item">viCal</h1>
+    </header>
+    <div id="content" class="w3-container"></div>
+    <footer class="w3-container w3-theme w3-margin-top">
+        <h3>1.0.0.0</h3>
+    </footer>
+    <div id="confirm" class="w3-hide">
+      <form class="w3-container w3-padding-64">
+        <span id="confirm-text"></span><br/>
+        <button id="confirm-ok" class="w3-button w3-grey w3-margin">Ok</button>
+        <button id="confirm-cancel" class="w3-button w3-grey w3-margin">Mégsem</button>
+      </form>
+    </div>
+    <div id="category-popup" class="w3-hide">
+      <form class="w3-container w3-padding-64">
+        <p id="category-fields-error" class="w3-hide"></p>
+        <label for='category-name'>Kategória neve</label><input class="w3-input w3-border" type='text' id='category-name' name='category-name'/>
+        <label for='category-style'>Szín</label><input class="w3-input w3-border" type='text' id='category-style' name='category-style' />
+        <button class='w3-button w3-grey w3-margin' id="category-form-ok">Ok</button>
+        <button class='w3-button w3-grey w3-margin' id="category-form-cancel">Mégsem</button>
+      </form>
+    </div>
+    <div id="event-popup" class="w3-hide">
+      <form class="w3-container w3-padding-64">
+        <p id="event-fields-error" class="w3-hide"></p>
+        <label for="event-start">Kezdés</label><input class="w3-input w3-border" type="date" id="event-start" name="event-start"/>
+        <label for="event-end">Befejezés</label><input class="w3-input w3-border" type="date" id="event-end" name="event-end" value=""/>
+        <label for="event-subject">Tárgy</label><input class="w3-input w3-border" type="text" id="event-subject" name="event-subject"/>
+        <label id="event-category-label" for="event-category">Kategória</label>
+        <button class="w3-button w3-grey w3-margin" id="event-form-ok">Ok</button>
+        <button class="w3-button w3-grey w3-margin" id="event-form-cancel">Mégsem</button>
+      </form>
+    </div>
+   </body>
+</html>
