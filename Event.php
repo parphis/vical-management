@@ -34,10 +34,11 @@ class Event extends DB {
     }
 
     $html = "<a href='#' onclick='editEvent();'><i class='material-icons'>add_circle</i>Új esemény</a>";
+    setlocale(LC_ALL, "hu_HU.utf8");
     foreach ($res as $key => $value) {
       $dt = new DateTime($value['start']);
       $html .= "<div class='w3-card-2 w3-margin ".(($value['color']!='')?'w3-'.$value['color']:'')."'>";
-      $html .= "<header class='w3-container'><h2 class='event-date'>".$dt->format('Y.m.d')."</h2></header>";
+      $html .= "<header class='w3-container'><h2 class='event-date'>".$dt->format('Y.m.d')." ".strftime('%A', $dt->getTimestamp())."</h2></header>";
       $html .= "<div class='w3-container'>";
       $html .= "<span class='event-subject'>".$value['subject']."</span><br/>";
       $html .= "<span class='event-category'>".$value['name']."</span>";
